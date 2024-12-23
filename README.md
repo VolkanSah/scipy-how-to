@@ -1,7 +1,23 @@
+
 # SciPy Guide: Scientific Computing in Python
 
 ## Overview
 SciPy (Scientific Python) is a collection of mathematical algorithms and convenience functions built on NumPy. It provides advanced capabilities for optimization, linear algebra, integration, interpolation, and other domains.
+
+## Table of Contents
+- [Overview](#overview)
+- [Core Features and Submodules](#core-features-and-submodules)
+  - [scipy.optimize - Optimization and Root Finding](#1-scipyoptimize---optimization-and-root-finding)
+  - [scipy.integrate - Integration](#2-scipyintegrate---integration)
+  - [scipy.interpolate - Interpolation](#3-scipyinterpolate---interpolation)
+  - [scipy.linalg - Linear Algebra](#4-scipylinalg---linear-algebra)
+  - [scipy.stats - Statistical Functions](#5-scipystats---statistical-functions)
+  - [scipy.signal - Signal Processing](#6-scipysignal---signal-processing)
+- [Practical Examples](#practical-examples)
+  - [Curve Fitting](#example-1-curve-fitting)
+  - [Finding Roots](#example-2-finding-roots)
+  - [Statistical Analysis](#example-3-statistical-analysis)
+- [Best Practices](#best-practices)
 
 ## Core Features and Submodules
 
@@ -183,4 +199,53 @@ except Exception as e:
 ```python
 np.random.seed(42)
 data = stats.norm.rvs(size=1000)
+```
+
+5. Additional examples for reproducibility in motion and video synthesis:
+- **Motion Synthesis**:
+```python
+import numpy as np
+from scipy.interpolate import interp1d
+
+np.random.seed(42)  # Seed for reproducible motion
+keyframes = {0: np.random.rand(2), 30: np.random.rand(2), 60: np.random.rand(2)}
+time_points = np.array(list(keyframes.keys()))
+positions = np.array(list(keyframes.values()))
+motion_interp = interp1d(time_points, positions.T, kind='cubic')
+```
+- **Video Frame Generation**:
+```python
+np.random.seed(123)
+frames = [np.random.normal(size=(64, 64)) for _ in range(10)]
+```
+- **Noise Generation for Video Effects**:
+```python
+np.random.seed(456)
+video_noise = np.random.normal(0, 0.1, size=(30, 1920, 1080))
+```
+- **Particle Animation**:
+```python
+np.random.seed(789)
+particle_positions = np.random.rand(100, 2)
+particle_velocities = np.random.randn(100, 2) * 0.1
+```
+- **Color Palette Generation**:
+```python
+np.random.seed(101)
+color_palette = np.random.randint(0, 255, size=(10, 3))
+```
+- **Camera Shake Simulation**:
+```python
+np.random.seed(202)
+camera_motion = np.random.normal(0, 0.5, size=(60, 2))
+```
+- **Transition Effects**:
+```python
+np.random.seed(303)
+transition_curve = np.random.beta(2, 2, size=30)
+```
+- **Audio Synthesis**:
+```python
+np.random.seed(404)
+audio_samples = np.random.uniform(-1, 1, size=44100)
 ```
