@@ -7,17 +7,22 @@ SciPy (Scientific Python) is a collection of mathematical algorithms and conveni
 ## Table of Contents
 - [Overview](#overview)
 - [Core Features and Submodules](#core-features-and-submodules)
-  - [scipy.optimize - Optimization and Root Finding](#1-scipyoptimize---optimization-and-root-finding)
-  - [scipy.integrate - Integration](#2-scipyintegrate---integration)
-  - [scipy.interpolate - Interpolation](#3-scipyinterpolate---interpolation)
-  - [scipy.linalg - Linear Algebra](#4-scipylinalg---linear-algebra)
-  - [scipy.stats - Statistical Functions](#5-scipystats---statistical-functions)
-  - [scipy.signal - Signal Processing](#6-scipysignal---signal-processing)
+  - [scipy.optimize – Optimization and Root Finding](#1-scipyoptimize--optimization-and-root-finding)
+  - [scipy.integrate – Integration](#2-scipyintegrate--integration)
+  - [scipy.interpolate – Interpolation](#3-scipyinterpolate--interpolation)
+  - [scipy.linalg – Linear Algebra](#4-scipylinalg--linear-algebra)
+  - [scipy.stats – Statistical Functions](#5-scipystats--statistical-functions)
+  - [scipy.signal – Signal Processing](#6-scipysignal--signal-processing)
+  - [scipy.spatial – Spatial Algorithms and Data Structures](#7-scipyspatial--spatial-algorithms-and-data-structures)
+  - [scipy.fft – Fast Fourier Transforms](#8-scipyfft--fast-fourier-transforms)
+  - [scipy.ndimage – Multidimensional Image Processing](#9-scipyndimage--multidimensional-image-processing)
+  - [scipy.sparse – Sparse Matrix Support](#10-scipysparse--sparse-matrix-support)
 - [Practical Examples](#practical-examples)
   - [Curve Fitting](#example-1-curve-fitting)
   - [Finding Roots](#example-2-finding-roots)
   - [Statistical Analysis](#example-3-statistical-analysis)
 - [Best Practices](#best-practices)
+
 
 ## Core Features and Submodules
 
@@ -117,6 +122,70 @@ raw_signal = np.sin(2*np.pi*10*t) + np.random.normal(0, 0.1, len(t))
 b, a = signal.butter(4, 0.2)  # 4th order Butterworth filter
 filtered_signal = signal.filtfilt(b, a, raw_signal)
 ```
+
+### 7. scipy.spatial – Spatial Algorithms and Data Structures
+```
+from scipy.spatial import KDTree, ConvexHull
+import numpy as np
+
+# KD-Tree example for nearest-neighbor search
+points = np.random.rand(10, 2)
+tree = KDTree(points)
+dist, idx = tree.query([0.5, 0.5])
+print(f"Nearest point: {points[idx]}, Distance: {dist}")
+
+# Convex Hull example
+hull = ConvexHull(points)
+print("Convex hull vertices:", hull.vertices)
+
+```
+Use cases: Nearest-neighbor searches, computational geometry (e.g. convex hulls, Delaunay triangulations).
+
+### 8. scipy.fft – Fast Fourier Transforms (Modern Replacement for fftpack)
+```
+from scipy.fft import fft, fftfreq
+import numpy as np
+
+# FFT of a simple signal
+x = np.linspace(0, 2 * np.pi, 100)
+y = np.sin(x)
+yf = fft(y)
+xf = fftfreq(len(x), (x[1] - x[0]))
+
+print("FFT frequencies:", xf)
+print("FFT values:", np.abs(yf))
+
+```
+Use cases: Signal processing, spectral analysis, filtering.
+
+### 9. scipy.ndimage – Multidimensional Image Processing
+```
+from scipy import ndimage
+import numpy as np
+
+# Apply Gaussian blur to an image (2D array)
+image = np.random.rand(100, 100)
+blurred = ndimage.gaussian_filter(image, sigma=3)
+
+print("Blurred image shape:", blurred.shape)
+
+```
+Use cases: Image filtering, transformations, feature detection (e.g. edge detection, measurements).
+
+### 10. scipy.sparse – Sparse Matrix Support
+```
+from scipy.sparse import csr_matrix
+
+# Create a sparse matrix
+dense = np.array([[0, 0, 3], [4, 0, 0], [0, 0, 5]])
+sparse = csr_matrix(dense)
+
+print("Sparse matrix representation:\n", sparse)
+print("Back to dense:\n", sparse.toarray())
+
+
+```
+Use cases: Efficient storage and computation with large, mostly-zero matrices (e.g. graph adjacency matrices, linear algebra).
 
 ## Practical Examples
 
