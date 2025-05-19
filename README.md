@@ -318,3 +318,5 @@ transition_curve = np.random.beta(2, 2, size=30)
 np.random.seed(404)
 audio_samples = np.random.uniform(-1, 1, size=44100)
 ```
+
+Created by [Volkan Sah](https://github.com/volkansah)
